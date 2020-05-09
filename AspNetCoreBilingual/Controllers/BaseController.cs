@@ -32,5 +32,10 @@ namespace AspNetCoreBilingual.Controllers
 
             base.OnActionExecuting(context);
         }
+
+        protected void SetPageTitle(string title)
+        {
+            ViewData["PageTitle"] = title;
+        }
     }
 }

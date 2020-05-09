@@ -9,6 +9,7 @@ namespace AspNetCoreBilingual.Controllers
         [HttpGet("/{culture:regex(fr)}/tableaudebord/demandesdeservice")]
         public IActionResult Index()
         {
+            SetPageTitle("Service Requests");
             return View();
         }
     }

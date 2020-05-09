@@ -8,6 +8,7 @@ namespace AspNetCoreBilingual.Controllers
         [HttpGet("/{culture:regex(fr)}/accueil")]
         public IActionResult Index()
         {
+            SetPageTitle("Home");
             return View();
         }
     }
