@@ -55,6 +55,7 @@ namespace AspNetCoreBilingual
 
             app.UseHttpsRedirection();
             app.UseCookiePolicy();
+            app.UseStaticFiles();
 
             IList<CultureInfo> supportedCultures = new List<CultureInfo>
             {
