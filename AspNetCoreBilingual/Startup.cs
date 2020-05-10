@@ -35,15 +35,16 @@ namespace AspNetCoreBilingual
 
             services
                 .AddLocalization(o => o.ResourcesPath = "Resources")
-                .AddMvc(o => o.EnableEndpointRouting = false)
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix, o => o.ResourcesPath = "Resources")
-                .SetCompatibilityVersion(CompatibilityVersion.Latest);
+                .AddRouting()
+                .AddControllersWithViews();
+
+            //https://stackoverflow.com/questions/60019136/asp-net-core-3-1-shared-localization-not-working-for-version-3-1
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.EnvironmentName == "Development")
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -56,6 +57,7 @@ namespace AspNetCoreBilingual
             app.UseHttpsRedirection();
             app.UseCookiePolicy();
             app.UseStaticFiles();
+            app.UseRouting();
 
             IList<CultureInfo> supportedCultures = new List<CultureInfo>
             {
@@ -73,19 +75,25 @@ namespace AspNetCoreBilingual
             var requestProvider = new RouteDataRequestCultureProvider();
             localizationOptions.RequestCultureProviders.Insert(0, requestProvider);
 
-            app.UseRouter(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapMiddlewareRoute("{culture=en}/{*mvcRoute}", subApp =>
-                {
-                    subApp.UseRequestLocalization(localizationOptions);
-                    subApp.UseMvc(mvcRoutes =>
-                    {
-                        mvcRoutes.MapRoute(
-                            name: "default",
-                            template: "{culture=en}/{controller=Home}/{action=Index}/{id?}");
-                    });
-                });
+                endpoints.MapRazorPages();                
+                endpoints.MapControllerRoute("default", "{culture=en}/{controller=Home}/{action=Index}/{id?}");
             });
+
+            //app.UseRouter(routes =>
+            //{
+            //    routes.MapMiddlewareRoute("{culture=en}/{*mvcRoute}", subApp =>
+            //    {
+            //        subApp.UseRequestLocalization(localizationOptions);
+            //        subApp.UseMvc(mvcRoutes =>
+            //        {
+            //            mvcRoutes.MapRoute(
+            //                name: "default",
+            //                template: "{culture=en}/{controller=Home}/{action=Index}/{id?}");
+            //        });
+            //    });
+            //});
         }
     }
 }
