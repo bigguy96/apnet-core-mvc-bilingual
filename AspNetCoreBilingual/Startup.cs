@@ -1,12 +1,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Localization.Routing;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,9 +33,10 @@ namespace AspNetCoreBilingual
             services
                 .AddLocalization(o => o.ResourcesPath = "Resources")
                 .AddRouting()
-                .AddControllersWithViews();
+                .AddControllersWithViews();            
 
             //https://stackoverflow.com/questions/60019136/asp-net-core-3-1-shared-localization-not-working-for-version-3-1
+            //https://stackoverflow.com/questions/59941181/net-core-3-1-localization-culture-by-url-localhost-en-area-controller-action
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +54,7 @@ namespace AspNetCoreBilingual
 
             app.UseHttpsRedirection();
             app.UseCookiePolicy();
+            app.UseRequestLocalization();
             app.UseStaticFiles();
             app.UseRouting();
 
@@ -75,25 +74,26 @@ namespace AspNetCoreBilingual
             var requestProvider = new RouteDataRequestCultureProvider();
             localizationOptions.RequestCultureProviders.Insert(0, requestProvider);
 
-            app.UseEndpoints(endpoints =>
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    //endpoints.MapRazorPages();                
+            //    endpoints.MapControllerRoute("default", "{culture=en}/{controller=Home}/{action=Index}/{id?}");
+            //});
+
+            app.UseRouter(routes =>
             {
-                endpoints.MapRazorPages();                
-                endpoints.MapControllerRoute("default", "{culture=en}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapMiddlewareRoute("{culture=en}/{*mvcRoute}", subApp =>
+                {
+                    subApp.UseRequestLocalization(localizationOptions);
+                    subApp.UseRouting();
+                    subApp.UseEndpoints(mvcRoutes =>
+                    {
+                        mvcRoutes.MapControllerRoute("default", "{culture=en}/{controller=Home}/{action=Index}/{id?}");
+                    });
+                });
             });
 
-            //app.UseRouter(routes =>
-            //{
-            //    routes.MapMiddlewareRoute("{culture=en}/{*mvcRoute}", subApp =>
-            //    {
-            //        subApp.UseRequestLocalization(localizationOptions);
-            //        subApp.UseMvc(mvcRoutes =>
-            //        {
-            //            mvcRoutes.MapRoute(
-            //                name: "default",
-            //                template: "{culture=en}/{controller=Home}/{action=Index}/{id?}");
-            //        });
-            //    });
-            //});
+            //https://forums.asp.net/t/2159027.aspx?How+can+I+use+globalization+and+localization+in+net+core+3+0+preview8+            
         }
     }
 }
