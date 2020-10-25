@@ -1,2 +1,2 @@
 # apnet-core-mvc-bilingual
-Experimenting with creating a bilingual asp.net core mvc application.
+Experimenting with creating a bilingual asp.net core mvc application using CDTS template.
