@@ -1,1 +1,1 @@
-Bilingual asp.net core mvc application using CDTS template.
+Bilingual ASP.NET Core 3.1 MVC application with CDTS template.
