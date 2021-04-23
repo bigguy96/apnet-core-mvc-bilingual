@@ -2,11 +2,11 @@
 
 namespace AspNetCoreBilingual.Controllers
 {
+    [Route("services")]
     public class ServicesController : BaseController
     {
         // GET
-        [HttpGet("/{culture:regex(en)}/dashboard/services")]
-        [HttpGet("/{culture:regex(fr)}/tableaudebord/services")]
+        [HttpGet("dashboard-tableaudebord")]
         public IActionResult Index()
         {
             SetPageTitle("Services");

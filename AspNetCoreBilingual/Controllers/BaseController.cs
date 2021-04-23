@@ -11,24 +11,24 @@ namespace AspNetCoreBilingual.Controllers
         // GET
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var culture = context.RouteData.Values["culture"].ToString();
-            var alternateCulture = culture.Equals("en") ? "fr" : "en";
-            var path = string.Empty;
+            //var culture = context.RouteData.Values["culture"].ToString();
+            //var alternateCulture = culture.Equals("en") ? "fr" : "en";
+            //var path = string.Empty;
 
-            if (context.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor)
-            {
-                var actionAttributes = controllerActionDescriptor.MethodInfo.GetCustomAttributes(inherit: true)
-                    .Cast<HttpGetAttribute>()
-                    .SingleOrDefault(x => !x.Template.Contains(culture));
+            //if (context.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor)
+            //{
+            //    var actionAttributes = controllerActionDescriptor.MethodInfo.GetCustomAttributes(inherit: true)
+            //        .Cast<HttpGetAttribute>()
+            //        .SingleOrDefault(x => !x.Template.Contains(culture));
 
-                var regex = new Regex(@"/{(.*?)}");
-                if (actionAttributes != null)
-                {
-                    path = regex.Replace(actionAttributes.Template, "");
-                }
-            }
+            //    var regex = new Regex(@"/{(.*?)}");
+            //    if (actionAttributes != null)
+            //    {
+            //        path = regex.Replace(actionAttributes.Template, "");
+            //    }
+            //}
 
-            ViewData["Toggle"] = $"/{alternateCulture}{path}";
+            //ViewData["Toggle"] = $"/{alternateCulture}{path}";
 
             base.OnActionExecuting(context);
         }
