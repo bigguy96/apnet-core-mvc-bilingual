@@ -6,8 +6,8 @@ namespace AspNetCoreBilingual.Controllers
     public class ServiceRequestsController : BaseController
     {
         // GET
-        [HttpGet("dashboard-tableaudebord")]
-        public IActionResult Index()
+        [HttpGet("dashboard-tableaudebord/{id:int}")]
+        public IActionResult Index(int id, string name, string other)
         {
             SetPageTitle("Service Requests");
             return View();

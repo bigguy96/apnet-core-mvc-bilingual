@@ -4,6 +4,8 @@
     </div>
 
     <ul>
-        <li><a asp-controller="ServiceRequests" asp-action="Index">@Localizer["ServiceRequests"]</a></li>
+        <li><a asp-controller="ServiceRequests" asp-action="Index" asp-route-id="100" asp-route-name="test" asp-route-other="test2">@Localizer["ServiceRequests"]</a></li>
         <li><a asp-controller="Services" asp-action="Index">@Localizer["Services"]</a></li>
     </ul>
+
+    @*https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-5.0*@
