@@ -21,18 +21,10 @@ namespace AspNetCoreBilingual.Controllers
             var items = queryString.SelectMany(keyValuePair => keyValuePair.Value, (col, value) => new KeyValuePair<string, string>(col.Key, value)).ToList();
             var fullUri = uri.GetLeftPart(UriPartial.Path);
 
-            if (Request.Query.ContainsKey("lang"))
-            {
-                items.RemoveAll(x => x.Key == "lang"); // Remove all values for key
-                var queryBuilder = new QueryBuilder(items) { { "lang", alternateCulture } };
-
-                fullUri += queryBuilder.ToQueryString();
-            }
-            else
-            {
-                var queryBuilder = new QueryBuilder { { "lang", alternateCulture } };
-                fullUri += queryBuilder.ToQueryString();
-            }
+            items.RemoveAll(x => x.Key == "lang"); //Remove all values for language
+            
+            var queryBuilder = new QueryBuilder(items) {{"lang", alternateCulture}};
+            fullUri += queryBuilder.ToQueryString();
 
             ViewData["Toggle"] = fullUri;
 
