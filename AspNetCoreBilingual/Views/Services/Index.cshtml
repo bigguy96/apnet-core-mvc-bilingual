@@ -1,6 +1,24 @@
-﻿
+﻿@model ServiceViewModel
+
     <div>
         <h2>@Localizer["Services"]</h2>
     </div>
 
     <p><a asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></p>
+
+    <fieldset>
+        <legend><strong>Service</strong></legend>
+        <form asp-action="Index" asp-controller="Services" method="post">
+            <div class="form-group">
+                <label asp-for="Id">@Localizer["Id"]</label>
+                <input asp-for="Id" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">@Localizer["Name"]</label>
+                <input asp-for="Name" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </fieldset>
