@@ -27,7 +27,7 @@ namespace AspNetCoreBilingual
                 .AddControllersWithViews()
                 .AddDataAnnotationsLocalization(options =>
                 {
-                    options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResource));
+                    options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(ValidationResource));
                 });
 
             services.Configure<RequestLocalizationOptions>(options =>
