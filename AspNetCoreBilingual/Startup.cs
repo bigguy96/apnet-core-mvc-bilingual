@@ -1,6 +1,8 @@
 using System.Globalization;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +24,11 @@ namespace AspNetCoreBilingual
             services
                 .AddLocalization(o => o.ResourcesPath = "Resources")
                 .AddRouting()
-                .AddControllersWithViews();
+                .AddControllersWithViews()
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResource));
+                });
 
             services.Configure<RequestLocalizationOptions>(options =>
             {

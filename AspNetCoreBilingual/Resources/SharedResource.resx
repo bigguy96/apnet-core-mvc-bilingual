@@ -132,4 +132,8 @@
   <data name="Services" xml:space="preserve">
     <value>Services</value>
   </data>
+  <data name="This field is required." xml:space="preserve">
+    <value>This field is required.</value>
+    <comment>This field is required.</comment>
+  </data>
 </root>

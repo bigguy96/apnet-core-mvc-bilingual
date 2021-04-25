@@ -1,4 +1,4 @@
-﻿using AspNetCoreBilingual.Models;
+﻿using AspNetCoreBilingual.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreBilingual.Controllers
