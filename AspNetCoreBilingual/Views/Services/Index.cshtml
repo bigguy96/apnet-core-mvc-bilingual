@@ -1,14 +1,10 @@
 ﻿@model AspNetCoreBilingual.ViewModels.ServiceViewModel
 
-<div>
-    <h2>@Localizer["Services"]</h2>
-</div>
-
 <p><a asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></p>
 
 <hr />
 
-<div asp-validation-summary="All" class="text-danger"></div>
+<validation-summary-list-items></validation-summary-list-items>
 
 <fieldset>
     <legend><strong>Service</strong></legend>
