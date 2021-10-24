@@ -7,5 +7,34 @@
         <li><a asp-controller="ServiceRequests" asp-action="Index" asp-route-id="100" asp-route-name="test" asp-route-other="test2">@Localizer["ServiceRequests"]</a></li>
         <li><a asp-controller="Services" asp-action="Index">@Localizer["Services"]</a></li>
     </ul>
+    
+    <table class="wb-tables table" data-wb-tables='{ "ordering" : false }' id="bob">
+        <thead>
+        <tr>
+            <th scope="col">Rendering engine</th>
+            <th scope="col">Browser</th>
+            <th scope="col">Platform(s)</th>
+            <th scope="col">Engine version</th>
+            <th scope="col">CSS grade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Presto</td>
+            <td>Opera 9.0</td>
+            <td>Win 95+ / OSX.3+</td>
+            <td>-</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>Presto</td>
+            <td>Opera 9.2</td>
+            <td>Win 88+ / OSX.3+</td>
+            <td>-</td>
+            <td>A</td>
+        </tr>
+        </tbody>
+    </table>
 
     @*https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-5.0*@
+    @*https://codepen.io/alico/pen/bpLgOL*@
